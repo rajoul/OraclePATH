@@ -10,6 +10,7 @@
 2. [checklist2: Gestion des schemas](#checklist2)
 3. [checklist3: Gestion des roles](#checklist3)
 3. [checklist4: Gestion de stockage](#checklist4)
+6. [checklist6: Gestion des tablespace UNDO](#checklist6)
 
 
 go check: https://localhost:5500/em/login
@@ -304,3 +305,21 @@ SELECT * from dba_data_files;
 
 une fois je fais le permier insert in a table (segment) => Oracle allow un seul extent(8 block) une fois j'insère 65536 bytes (extent1 est rempli) il alloue un deuxième extent
 
+
+# checklist6
+  Gestion des tables spaces UNDO
+
+```
+When we execute an operations that needs to allocate undo space:
+
+Allocate an extent in an undo segment which has no active transaction. Why in other segment? Because Oracle tries to distribute transactions over all undo segments.
+  If no undo segment was found then oracle tries to online an off-line undo segment and use it to assign the new extent..
+  If no undo segments was possible to online, then Oracle creates a new undo segment and use it.
+  If the free space doesn't permit creation of undo segment, then Oracle tries to reuse an expired extent from the current undo segments.
+  If failed, Oracle tries to reuse an expired extent from another undo segment.
+  If failed, Oracle tries to autoextend a datafile (if autoextensible=yes)
+  If failed, Oracle tries to reuse an unexpired extent from the current undo segment.
+  If failed, Oracle tries to reuse an unexpired extent from another undo segment.
+  If failed, then the operation will fail.
+
+  ```

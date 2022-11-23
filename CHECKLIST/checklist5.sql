@@ -18,7 +18,7 @@ grant select any sequence to myrole;
 
 grant myrole to abdel;
 
-CREATE TABLESPACE tbs1 DATAFILE 'C:\Users\de0l\Desktop\oracle\oradata\ORCL\MYTBS01.DBF' SIZE 1m, 'C:\Users\de0l\Desktop\oracle\oradata\ORCL\MYTBS02.DBF' SIZE 1m;
+CREATE TABLESPACE tbs1 DATAFILE 'C:\Users\de0l\Desktop\ora\oradata\ORACL\MYTBS01.DBF' SIZE 1m, 'C:\Users\de0l\Desktop\ora\oradata\ORACL\MYTBS02.DBF' SIZE 1m;
 
 select * from dba_data_files where tablespace_name='TBS1';
 
@@ -27,7 +27,7 @@ conn abdel/abdel;
 
 create table test (id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1), value INT);
 BEGIN
-   FOR counter IN 1..100000 loop
+   FOR counter IN 1..1000 loop
       INSERT INTO test(value)
       VALUES(counter);
    END loop;
@@ -49,7 +49,7 @@ ALTER TABLE abdel.test MOVE TABLESPACE TBS1;
 conn abdel/abdel;
 
 BEGIN
-   FOR counter IN 1..300000 loop
+   FOR counter IN 1..30000 loop
       INSERT INTO test(value)
       VALUES(counter);
    END loop;
@@ -61,7 +61,7 @@ select segment_name,segment_type, bytes, tablespace_name, extents, blocks from d
 -- /* TWO WAYS to extent tablespace
 --     1. extent datafile
 -- */
-alter database datafile 'C:\Users\de0l\Desktop\oracle\oradata\ORCL\mytbs02.dbf' RESIZE 2M;
+alter database datafile 'C:\Users\de0l\Desktop\ora\oradata\ORACL\mytbs02.dbf' RESIZE 2M;
 
 conn abdel/abdel;
 
@@ -78,7 +78,7 @@ select segment_name,segment_type, bytes, tablespace_name, extents, blocks from d
 
 
 -- /*  2. add a datafile */
-ALTER TABLESPACE tbs1 ADD DATAFILE 'C:\Users\de0l\Desktop\oracle\oradata\ORCL\mytbs03.dbf' SIZE 1m autoextend on;
+ALTER TABLESPACE tbs1 ADD DATAFILE 'C:\Users\de0l\Desktop\ora\oradata\ORACL\mytbs03.dbf' SIZE 1m autoextend on;
 
 conn abdel/abdel;
 
