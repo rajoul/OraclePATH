@@ -20,7 +20,7 @@ grant myrole to abdel;
 grant select on dba_undo_extents to abdel;
 
  
-create undo tablespace udtbs2 datafile 'C:\USERS\DE0L\DESKTOP\ORA\oradata\oracl\undotbs02' size 2m;
+create undo tablespace udtbs2 datafile 'C:\USERS\DE0L\DESKTOP\ORA\oradata\oracl\undotbs02' size 3m;
 alter system set undo_tablespace=UDTBS2 scope=both;
 
 alter system set undo_retention=200 scope=both;
@@ -80,7 +80,7 @@ END;
 select status, count(*) from dba_undo_extents where tablespace_name='UDTBS2' group by status;
 
 BEGIN
-   FOR counter IN 1..500 loop
+   FOR counter IN 1..1000 loop
       INSERT INTO test(value)
       VALUES(counter);
    END loop;
@@ -108,8 +108,11 @@ drop tablespace udtbs2 including contents and datafiles;
 drop tablespace tbs1 including contents and datafiles;
 
 /* 
-shutdown immediate
-startup
+Question:
+	pourquoi le totalextents de datafile est different de la somme des extents dans dba_segments
+		- select segment_name, blocks, extents from dba_segments where tablespace_name='UDTBS2';
+		- select a.tablespace_name, a.file_name, b.contents, a.blocks/8 as Totalextents from dba_data_files a 
+		 	join dba_tablespaces b on a.tablespace_name=b.tablespace_name where contents='UNDO';
 */
 
 

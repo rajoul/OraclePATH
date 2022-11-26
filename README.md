@@ -13,6 +13,9 @@
 6. [checklist6: Gestion des tablespace UNDO](#checklist6)
 
 
+[Drop Database](#dropdatabase)
+
+
 go check: https://localhost:5500/em/login
 or 
 ```bash
@@ -103,6 +106,9 @@ get the session_role
 # help show
 
 ```
+
+### dropdatabase
+
 
 
 # checklist1 
