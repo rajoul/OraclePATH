@@ -11,6 +11,7 @@
 3. [checklist3: Gestion des roles](#checklist3)
 3. [checklist4: Gestion de stockage](#checklist4)
 6. [checklist6: Gestion des tablespace UNDO](#checklist6)
+7. [checklist7: Oracle Net Listener](#checklist7)
 
 
 [Drop Database](#dropdatabase)
@@ -329,3 +330,38 @@ Allocate an extent in an undo segment which has no active transaction. Why in ot
   If failed, then the operation will fail.
 
   ```
+
+
+
+## checklist7
+  Oracle Net Listener
+
+C:\Users\de0l\Desktop\Ora\Oracle_extract\network\admin\listener.ora => est le configuration des paramètres réseau coté serveur (la base sera en écoute sur quel address + port)
+
+```
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = 1523))
+      (ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1523))
+    )
+  )
+```
+chaque modifs de ce fichier il fallait 
+```
+  1. lsnrctl stop
+  2. lsnrctl start
+```
+
+
+C:\Users\de0l\Desktop\Ora\Oracle_extract\network\admin\tnsnames.ora => pour la configuration des alias pour les connexions distantes
+```
+ORACL =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.67)(PORT = 1523))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = oracl)
+    )
+  )
+```

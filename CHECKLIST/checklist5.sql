@@ -1,7 +1,7 @@
 SET SERVEROUTPUT ON
 BEGIN
     DBMS_OUTPUT.PUT_LINE('**************************************************************************************');
-    DBMS_OUTPUT.PUT_LINE('*****************************| CHECKLIST5: Gestion des tablespace |*******************');
+    DBMS_OUTPUT.PUT_LINE('*****************************| CHECKLIST5: Gestion des tablespaces |******************');
     DBMS_OUTPUT.PUT_LINE('**************************************************************************************');
 END;
 /
@@ -91,5 +91,14 @@ END;
 /
 conn sys/oracle as sysdba;
 select segment_name,segment_type, bytes, tablespace_name, extents, blocks from dba_segments WHERE segment_name ='TEST';
+
+/* 
+                          MOVE OR RENAME A DATAFILE
+      1. ALTER TABLESPACE tbs1 OFFLINE NORMAL;
+      2. cp C:\Users\de0l\Desktop\Ora\oradata\ORACL\mytbs03.dbf to C:\Users\de0l\Desktop\Ora\oradata\ORACL\tbs03.dbf 
+      3. ALTER TABLESPACE tbs1 RENAME DATAFILE 'C:\Users\de0l\Desktop\ora\oradata\ORACL\mytbs03.dbf' to 'C:\Users\de0l\Desktop\ora\oradata\ORACL\tbs03.dbf';
+      4. ALTER TABLESPACE tbs1 ONLINE;
+      5. détruire C:\Users\de0l\Desktop\Ora\oradata\ORACL\mytbs03.dbf 
+*/
 
 drop tablespace tbs1 including contents and datafiles;
