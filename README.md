@@ -12,6 +12,7 @@
 3. [checklist4: Gestion de stockage](#checklist4)
 6. [checklist6: Gestion des tablespace UNDO](#checklist6)
 7. [checklist7: Oracle Net Listener](#checklist7)
+8. [checklist8: Oracle keywords](#checklist8)
 
 
 [Drop Database](#dropdatabase)
@@ -365,3 +366,99 @@ ORACL =
     )
   )
 ```
+
+
+# Checklist8
+
+
+INTERSECT
+```
+SELECT column_list_1 FROM T1
+INTERSECT
+SELECT column_list_1 FROM T2;
+
+- Intersect n'ignore pas les NULL valeurs
+- columns_list doit avoir le meme nombre mais pas les memes noms
+```
+
+1. ORDER BY
+```
+- order by: par defaut est ASC
+- en cas de multi colonnes 'ORDER BY name, price DESC': il ordre d'abord par name ASC et s'il a des memes names on ordre par price DESC
+
+```
+
+
+2. GROUP BY
+```
+SELECT colonne1, fonction(colonne2)
+FROM table
+GROUP BY colonne1
+- le nombre de colonne de select (sans avg) doit etre dans group by
+- cette commande doit toujours s'utiliser apres la commande WHERE et avant la commande HAVING.
+```
+
+3. UNION OR UNION ALL
+```
+SELECT column_list_1 FROM T1
+UNION or UNION ALL
+SELECT column_list_1 FROM T2;
+
+column_list_1 and column_list_2 doivent:
+  - avoir le meme nombre de colomnes et dans le meme ordre
+  - avoir les memes groupe de data types (select1 varchar and select2 char -> ca passe les deux appartient au meme groupe TEXT)
+UNION retourne les lignes sans duplicat, UNION ALL retourne lignes avec les duplicats
+Seulement la dernière SELECT peut avoir un ORDER BY
+Seulement les noms de colonnes de la première SELECT qui sont pris en compte
+SQL> SELECT country, city "la ville" from customers UNION select country "CRT", city "erjer erer" from branches order by country;
+country     la ville
+--------    --------
+Indian      bangalore
+
+En cas d'absence de ORDER BY => la premiere colonne de la première SELECT est utilise (par defaut ASC)
+
+```
+
+4. Single ROW
+```
+fonctions qui retourne des résultats unique
+FLOOR -> floor(4.3)=4
+CEIL -> ceil(4.2)=5
+MOD -> MOD(11,4)=3
+TRUNC ->  trunc(1.253,1) =1.2  on peut l'utiliser aussi pour les dates
+          trunc(125.25, -2)=100
+CONCAT -> concat two caracters of any data type of CHAR
+TRIM ->
+  select trim(leading 'M' from 'MADAM') from dual; => ADAM
+  select trim(trailing 'M' from 'MADAM') from dual; => MADA
+  select trim(both 'M' from 'MADAM') from dual; => ADA
+INST ->
+  SELECT INSTR( 'hello world!' , 'world' ); => 7
+
+```
+
+5. SelfJoin
+```
+SELECT column_list
+FROM T t1
+INNER JOIN T t2 ON join_predicate;
+
+- Inner join on peut utiliser ON/WHERE ou INNER/OUTER join
+```
+6. equijoin and non-equijoin
+```
+equijoin utilise l'operateur =
+SELECT column_list  FROM table1, table2 WHERE table1.column_name = table2.column_name; 
+SELECT column_list  FROM table1, table2 ON table1.column_name = table2.column_name; 
+```
+
+
+4. Subqueries -
+Global temporary table
+data dictionnary
+ADR
+resumable session
+least of priviledge
+outer join <-> selfjoin
+shrinking segments
+Dual table

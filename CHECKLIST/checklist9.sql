@@ -53,6 +53,8 @@ SELECT Country, City FROM Customers INTERSECT SELECT Country, City FROM Branches
 /*
 Intersect elimine les duplicats dans le resultat
 il fallait avoir les memes nombres de colonnes et types de colonnes dans les deux selects
+les noms de colonnes des deux select peuvent etre different
+les noms des colonnes de premier SELECT qui pris en consideration au resultat
 */
 
 

@@ -28,3 +28,5 @@ col password format a15
 col profile format a15
 col tablespace_name format a15
 col CLUSTER_NAME format a15
+col LOCALTIMESTAMP format a30
+col CURRENT_TIMESTAMP format a35
