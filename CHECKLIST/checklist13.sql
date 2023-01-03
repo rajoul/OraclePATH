@@ -35,7 +35,7 @@ END;
 select segment_name, segment_type, extents, blocks, bytes from dba_segments where segment_name='TEST';
 
 conn sys/oracle as sysdba;
--- Lorsque il manque d'espace la session reste en suspend 10 secondes
+-- Lorsque il manque d'espace la session reste en suspend 20 secondes
  alter system set resumable_timeout=20;
 
 conn abdel/abdel;

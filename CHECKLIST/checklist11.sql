@@ -60,7 +60,7 @@ The COALESCE() function returns the first non-null value in a list.
 SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com'); => return "W3Schools.com"
 
 			TO_CHAR()
-convert number ro varchar2
+convert number to varchar2
 			TO_DATE
 select TO_DATE('23/04/49','DD/MM/YY') from dual;
 

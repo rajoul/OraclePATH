@@ -11,7 +11,7 @@ drop user abdel cascade;
 create user abdel identified by abdel;
 
 grant myrole to abdel;
-create tablespace tbs1 datafile 'C:\USERS\DE0L\DESKTOP\ORA\oradata\oracl\undotbs02' size 10m;
+create tablespace tbs1 datafile 'C:\USERS\DE0L\DESKTOP\ORA\oradata\oracl\tbs01' size 10m;
 alter user abdel default tablespace tbs1;
 alter user abdel quota unlimited on tbs1;
 
@@ -26,7 +26,7 @@ select SYSTIMESTAMP from dual;
 COMMIT;
 select * from test;
 BEGIN
-   sys.dbms_session.sleep(7);
+   sys.dbms_session.sleep(5);
 END;
 /
 
@@ -36,7 +36,7 @@ COMMIT;
 select * from test;
 
 
-FLASHBACK TABLE test TO TIMESTAMP SYSTIMESTAMP - 2/24/60/60;  
+FLASHBACK TABLE test TO TIMESTAMP SYSTIMESTAMP - interval '1' second;  
 
 select * from test;
 
