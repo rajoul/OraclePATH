@@ -451,14 +451,3 @@ equijoin utilise l'operateur =
 SELECT column_list  FROM table1, table2 WHERE table1.column_name = table2.column_name; 
 SELECT column_list  FROM table1, table2 ON table1.column_name = table2.column_name; 
 ```
-
-
-4. Subqueries -
-Global temporary table
-data dictionnary
-ADR
-resumable session
-least of priviledge
-outer join <-> selfjoin
-shrinking segments
-Dual table

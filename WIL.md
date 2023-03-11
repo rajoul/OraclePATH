@@ -43,30 +43,22 @@
 	- evite les '-', ou bien met les - entre "" comme "custom-id" -> SELECT custom_id custom-id from table -> error
 	- column alias in a WHERE clause doesn't work
 
-#   What is remaining ?
+- SYSDATE is a SQL function that returns the current date and time set for the operating system of the database server. 
+- CURRENT_DATE returns the current date in the session time zone
+	```
+	select current_timestamp from dual;
+	select current_date from dual;
+	select sysdate from dual;
+	08-AUG-21 02.00.13.303335 AM US/PACIFIC
+	08-AUG-2021 02:00:15
+	08-AUG-2021 09:00:17
+	```
 
-1. inner and outer join -> Outer joins can be used between multiple tables per query
-2. Enterprise Manager Database Express
-3. ADR
-4. DBMS_PRIVILEGE_CAPTURE 
-5. Oracle Net Services
-6. service show unknown status
-7. DB_CREATE_FILE_DEST 
-8. non-equijoin
-9. trace files produced by the Oracle Database server
-10. OS_AUTHENT_PREFIX 
-11. V$TABLESPACE
-12. Oracle Data Dictionary -> 38
-13. ADD_MONTH and NEXT_DAY
-14. implicit and explicit conversion -> 44
-15. STOP_JOB=immediate
-16. Oracle database space management features will work with both Dictionary and Locally managed tablespaces?
-17. new transaction always start? -> 55
-18. PMON background process
-19. multitenant
-20. ASSM
-21. unsed column
-22. dispatchers in a shared server configuration
-23. dvanced connection options supported by Oracle Net
-24. 
-25.
+
+# MONTHS_BETWEEN
+
+	select MONTHS_BETWEEN(SYSDATE, '25/01/2023') from dual; -> 1
+	sysdate - '25/01/2023'
+
+	select SYSDATE-4 from dual; -> fait la soustraction de 4 jours -> rettourne une date
+	PROMO_BEGIN_DATE - SYSDATE -> will return a number.
